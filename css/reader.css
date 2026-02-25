@@ -1,0 +1,397 @@
+/* ================================
+   READER STYLES
+   ================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ================================
+   TOP BAR
+================================ */
+.top-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 56px;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#menu-btn {
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: opacity 0.2s;
+}
+
+#menu-btn:hover {
+  opacity: 0.8;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.back-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: #000000;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.back-btn:hover {
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+/* ================================
+   PROGRESS BAR
+================================ */
+.progress-wrapper {
+  position: fixed;
+  top: 56px;
+  width: 100%;
+  height: 4px;
+  background: var(--bg-main);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.progress-wrapper.active {
+  opacity: 1;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,
+    var(--accent-soft),
+    var(--accent)
+  );
+  transition: width 0.15s linear;
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: var(--bg-sidebar);
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 1002;
+  overflow-y: auto;
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+#close-btn {
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--text-main);
+  display: block;
+  margin-bottom: 20px;
+  text-align: right;
+  transition: opacity 0.2s;
+}
+
+#close-btn:hover {
+  opacity: 0.8;
+}
+
+#sidebar a {
+  display: block;
+  color: var(--text-main);
+  text-decoration: none;
+  margin-bottom: 12px;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+#sidebar a:hover {
+  background: var(--bg-hover);
+}
+
+/* FONT CONTROLS */
+.font-controls {
+  margin: 20px 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.font-controls p {
+  margin-bottom: 10px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.font-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.font-controls button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 600;
+  flex: 1;
+  transition: background 0.2s;
+}
+
+.font-controls button:hover {
+  background: var(--bg-hover);
+}
+
+/* ================================
+   OVERLAY
+================================ */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 900;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ================================
+   READER CONTENT
+================================ */
+.reader-container {
+  padding: 100px 20px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+#chapter-content {
+  max-width: 720px;
+  width: 100%;
+  font-size: 18px;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+  transition: font-size 0.2s ease;
+}
+
+/* Chapter title */
+#chapter-content h2 {
+  font-size: 1.6em;
+  margin-bottom: 1.5em;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+/* Paragraph styling */
+#chapter-content p {
+  font-size: 1em;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+  margin-bottom: 1.6em;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  color: var(--text-main);
+}
+
+/* Images */
+#chapter-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2em auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#chapter-content img.illustration {
+  margin: 3em auto;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+/* Blockquotes */
+#chapter-content blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: 1.5em;
+  margin: 2em 0;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+/* Code blocks */
+#chapter-content code {
+  background: var(--bg-card);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+  color: var(--accent);
+}
+
+#chapter-content pre {
+  background: var(--bg-card);
+  padding: 1.2em;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Courier New", Courier, monospace;
+  margin: 1.5em 0;
+  border: 1px solid var(--border);
+}
+
+#chapter-content pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--text-main);
+}
+
+/* ================================
+   FOOTER
+================================ */
+.reader-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 65px;
+  background: var(--bg-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  border-top: 1px solid var(--border);
+  z-index: 1000;
+}
+
+.reader-footer button {
+  padding: 10px 24px;
+  background: var(--bg-card);
+  color: var(--text-main);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 60px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.reader-footer button:hover {
+  background: var(--bg-hover);
+  transform: translateY(-2px);
+}
+
+.reader-footer button:active {
+  transform: translateY(0);
+}
+
+#chapter-number {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .reader-container {
+    padding: 90px 16px 80px;
+  }
+  
+  #chapter-content {
+    max-width: 100%;
+    font-size: 17px;
+  }
+  
+  #chapter-content h2 {
+    font-size: 1.4em;
+  }
+  
+  .reader-footer {
+    height: 60px;
+    gap: 20px;
+  }
+  
+  .reader-footer button {
+    padding: 8px 20px;
+    font-size: 15px;
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reader-container {
+    padding: 90px 12px 70px;
+  }
+  
+  #chapter-content {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  
+  .reader-footer {
+    height: 55px;
+    gap: 15px;
+  }
+  
+  .reader-footer button {
+    padding: 6px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Add at the end of reader.css */
+@import url('bookmarks.css');
+

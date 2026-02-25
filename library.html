@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DeadLeaf Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="css/theme-vars.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Bar - FIXED: Now uses text brand -->
+  <div class="top-bar">
+    <div class="menu-left">
+      <span id="menu-btn" aria-label="Open menu">☰</span>
+      <a href="index.html" class="brand-link" data-navigate="home">
+        <span class="brand">DeadLeaf</span>
+      </a>
+    </div>
+    <div class="menu-right">
+      <button id="bookmarks-toggle" class="icon-btn" aria-label="Bookmarks">
+        <i class="fas fa-bookmark"></i>
+        <span class="bookmark-count-badge" id="bookmark-count-badge">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sidebar - FIXED: Added auth links -->
+  <div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <img src="images/deadleaf.png" alt="DeadLeaf" class="sidebar-logo">
+    <span id="close-btn" aria-label="Close menu">✕</span>
+  </div>
+  <a href="#" data-navigate="home">Home</a>
+  <a href="#" data-navigate="library">Library</a>
+  <a href="#" id="sidebar-bookmarks">Bookmarks</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="terms.html">Terms</a>
+  <!-- Auth links - will be hidden when logged in -->
+  <a href="login.html">Sign In</a>
+  <a href="signup.html">Sign Up</a>
+  <div class="theme-controls">
+    <p>Theme</p>
+    <div class="theme-switcher">
+      <button data-set-theme="dark">Dark</button>
+      <button data-set-theme="sepia">Sepia</button>
+      <button data-set-theme="night">Night</button>
+    </div>
+  </div>
+</div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Back Button -->
+  <div class="back-btn-container">
+    <a href="#" data-navigate="back" class="back-btn">← Back to Home</a>
+  </div>
+
+  <!-- Library Section -->
+  <section class="library">
+    <div class="library-header">
+      <h1>Library</h1>
+      
+      <!-- READING STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="books-started">0</div>
+          <div class="stat-label">Books Started</div>
+          <div class="stat-trend positive">+2 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="books-completed">0</div>
+          <div class="stat-label">Books Completed</div>
+          <div class="stat-trend">12% complete</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="total-pages">0</div>
+          <div class="stat-label">Chapters Read</div>
+          <div class="stat-trend">+12 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="reading-streak">0</div>
+          <div class="stat-label">Day Streak</div>
+          <div class="stat-trend">Best: 7 days</div>
+        </div>
+      </div>
+
+      <!-- READING GOALS -->
+      <div class="goals-section">
+        <div class="section-header">
+          <h2 class="section-title">Reading Goals</h2>
+          <button class="edit-goals-btn" id="edit-goals">Edit Goals</button>
+        </div>
+        <div class="goals-container">
+          <div class="goal-item">
+            <div class="goal-info">
+              <span class="goal-label">Daily Reading</span>
+              <span class="goal-target">30 min / day</span>
+            </div>
+            <div class="goal-progress">
+              <div class="goal-progress-bar">
+                <div class="goal-progress-fill" style="width: 45%"></div>
+              </div>
+              <span class="goal-percent">45%</span>
+            </div>
+            <span class="goal-time">14 min today</span>
+          </div>
+          <div class="goal-item">
+            <div class="goal-info">
+              <span class="goal-label">Weekly Chapters</span>
+              <span class="goal-target">10 chapters / week</span>
+            </div>
+            <div class="goal-progress">
+              <div class="goal-progress-bar">
+                <div class="goal-progress-fill" style="width: 70%"></div>
+              </div>
+              <span class="goal-percent">70%</span>
+            </div>
+            <span class="goal-time">7 chapters this week</span>
+          </div>
+          <div class="goal-item">
+            <div class="goal-info">
+              <span class="goal-label">Books This Year</span>
+              <span class="goal-target">12 books / year</span>
+            </div>
+            <div class="goal-progress">
+              <div class="goal-progress-bar">
+                <div class="goal-progress-fill" style="width: 25%"></div>
+              </div>
+              <span class="goal-percent">25%</span>
+            </div>
+            <span class="goal-time">3 completed</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Search Bar -->
+      <div class="search-wrapper">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search by title, author, or genre..."
+            id="library-search"
+          >
+          <button class="search-clear" id="clear-search">
+            <i class="fas fa-times"></i>
+          </button>
+          <div class="search-shortcut">⌘K</div>
+        </div>
+        <div class="search-stats" id="search-stats">
+          <span id="result-count">0</span> results found
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTINUE READING SECTION -->
+    <div class="continue-section" id="continue-section">
+      <div class="section-header">
+        <h2 class="section-title">Continue Reading</h2>
+        <a href="#" class="section-link" id="view-all-history">View all →</a>
+      </div>
+      
+      <div class="continue-grid" id="continue-grid">
+        <div class="continue-skeleton"></div>
+        <div class="continue-skeleton"></div>
+        <div class="continue-skeleton"></div>
+      </div>
+    </div>
+
+    <!-- RECENTLY ADDED SECTION -->
+    <div class="recent-section" id="recent-section">
+      <div class="section-header">
+        <h2 class="section-title">Recently Added</h2>
+      </div>
+      
+      <div class="recent-grid" id="recent-grid">
+        <!-- Recent books will be injected here -->
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <h2 class="category-title">Manga</h2>
+    <div class="grid" id="manga-grid">
+      <div class="card skeleton" data-book-id="1" data-title="Alice in Borderlands" data-total-chapters="328" data-last-chapter="12" data-category="Manga"></div>
+      <div class="card skeleton" data-book-id="2" data-title="Death Note" data-total-chapters="108" data-last-chapter="0" data-category="Manga"></div>
+      <div class="card skeleton" data-book-id="3" data-title="Monster" data-total-chapters="162" data-last-chapter="45" data-category="Manga"></div>
+      <div class="card skeleton" data-book-id="4" data-title="Berserk" data-total-chapters="364" data-last-chapter="0" data-category="Manga"></div>
+    </div>
+
+    <h2 class="category-title">Manhwa</h2>
+    <div class="grid" id="manhwa-grid">
+      <div class="card skeleton" data-book-id="5" data-title="Solo Leveling" data-total-chapters="179" data-last-chapter="89" data-category="Manhwa"></div>
+      <div class="card skeleton" data-book-id="6" data-title="Tower of God" data-total-chapters="158" data-last-chapter="0" data-category="Manhwa"></div>
+      <div class="card skeleton" data-book-id="7" data-title="The Breaker" data-total-chapters="82" data-last-chapter="30" data-category="Manhwa"></div>
+      <div class="card skeleton" data-book-id="8" data-title="Noblesse" data-total-chapters="220" data-last-chapter="0" data-category="Manhwa"></div>
+    </div>
+
+    <h2 class="category-title">Books</h2>
+    <div class="grid" id="books-grid">
+      <div class="card skeleton" data-book-id="9" data-title="1984" data-total-chapters="45" data-last-chapter="12" data-category="Books"></div>
+      <div class="card skeleton" data-book-id="10" data-title="Dune" data-total-chapters="67" data-last-chapter="0" data-category="Books"></div>
+      <div class="card skeleton" data-book-id="11" data-title="Foundation" data-total-chapters="52" data-last-chapter="0" data-category="Books"></div>
+      <div class="card skeleton" data-book-id="12" data-title="The Hobbit" data-total-chapters="38" data-last-chapter="20" data-category="Books"></div>
+    </div>
+
+    <!-- No Results Message -->
+    <div class="no-results" id="no-results">
+      <h3>No matching books found</h3>
+      <p>Try different keywords or browse all categories</p>
+    </div>
+  </section>
+
+  <!-- Edit Goals Modal -->
+  <div class="modal" id="goals-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Reading Goals</h3>
+        <span class="close-modal" id="close-modal">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="goal-input-group">
+          <label>Daily Reading (minutes)</label>
+          <input type="number" id="goal-daily" value="30" min="5" max="480">
+        </div>
+        <div class="goal-input-group">
+          <label>Weekly Chapters</label>
+          <input type="number" id="goal-weekly" value="10" min="1" max="100">
+        </div>
+        <div class="goal-input-group">
+          <label>Yearly Books</label>
+          <input type="number" id="goal-yearly" value="12" min="1" max="100">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn cancel" id="cancel-goals">Cancel</button>
+        <button class="modal-btn save" id="save-goals">Save Goals</button>
+      </div>
+    </div>
+  </div>
+
+  <!--scripts-->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/library-search.js"></script>
+  <script src="js/reading-progress.js"></script>
+  <script src="js/bookmarks.js"></script>
+  <script src="js/auth-state.js"></script>
+  <script src="js/reading-stats.js"></script>
+
+  <!-- Library loading simulation -->
+  <script>
+    setTimeout(() => {
+      document.querySelectorAll('.skeleton').forEach(skeleton => {
+        skeleton.classList.remove('skeleton');
+        
+        const title = skeleton.dataset.title;
+        const lastChapter = parseInt(skeleton.dataset.lastChapter) || 0;
+        const totalChapters = parseInt(skeleton.dataset.totalChapters) || 100;
+        const progress = lastChapter > 0 ? ((lastChapter / totalChapters) * 100).toFixed(1) : 0;
+        
+        skeleton.setAttribute('data-progress', progress);
+        
+        if (lastChapter > 0) {
+          skeleton.innerHTML = `
+            <div class="card-content">
+              <div class="card-title">${title}</div>
+              <div class="card-progress">
+                <span class="card-progress-text">${progress}%</span>
+                <div class="card-progress-bar">
+                  <div class="card-progress-fill" style="width: ${progress}%"></div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          skeleton.innerHTML = `
+            <div class="card-content">
+              <div class="card-title">${title}</div>
+            </div>
+          `;
+        }
+      });
+      
+      document.dispatchEvent(new CustomEvent('booksLoaded'));
+    }, 1500);
+  </script>
+</body>
+</html>

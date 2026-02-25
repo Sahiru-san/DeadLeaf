@@ -1,0 +1,91 @@
+/* =========================
+   CENTRALIZED THEME VARIABLES
+   ========================= */
+
+:root {
+  /* Dark (default) */
+  --bg-main: #0f0f0f;
+  --bg-secondary: #0d0d0d;
+  --bg-sidebar: #141414;
+  --bg-card: #1a1a1a;
+  --bg-hover: #222222;
+
+  --text-main: #eaeaea;
+  --text-muted: #a0a0a0;
+
+  --accent: #ff9f1c;
+  --accent-soft: #ffcc00;
+
+  --border: #1f1f1f;
+}
+
+/* ===============================
+   NIGHT MODE (pure reading)
+   =============================== */
+body.night,
+body[data-theme="night"] {
+  --bg-main: #000000;
+  --bg-secondary: #050505;
+  --bg-card: #0a0a0a;
+  --bg-sidebar: #0a0a0a;
+  --bg-hover: #111111;
+
+  --text-main: #d6d6d6;
+  --text-muted: #8a8a8a;
+
+  --accent: #ff9f1c;
+  --accent-soft: #ffcc00;
+
+  --border: #111111;
+}
+
+/* ===============================
+   SEPIA THEME
+   =============================== */
+body[data-theme="sepia"] {
+  --bg-main: #f4ecd8;
+  --bg-secondary: #efe4c6;
+  --bg-sidebar: #e8dcc0;
+  --bg-card: #e2d5b6;
+  --bg-hover: #d8c9a8;
+
+  --text-main: #3b2f23;
+  --text-muted: #6b5b4a;
+
+  --accent: #c47a2c;
+  --accent-soft: #e0a458;
+
+  --border: #d2c3a5;
+}
+
+/* Add these theme-specific search enhancements */
+
+/* Dark Theme (default) */
+:root {
+  /* ... existing variables ... */
+  --search-glow: rgba(255, 159, 28, 0.15);
+}
+
+/* Night Theme */
+body.night .search-input:focus,
+body[data-theme="night"] .search-input:focus {
+  box-shadow: 0 8px 24px rgba(255, 159, 28, 0.1);
+  border-color: var(--accent);
+}
+
+/* Sepia Theme */
+body[data-theme="sepia"] .search-input {
+  background: #e8dcc0;
+  border-color: #d2c3a5;
+}
+
+body[data-theme="sepia"] .search-input:focus {
+  box-shadow: 0 8px 24px rgba(196, 122, 44, 0.2);
+  background: #f0e5cc;
+}
+
+body[data-theme="sepia"] .search-shortcut {
+  background: #d2c3a5;
+  color: #3b2f23;
+  border-color: #b8a78c;
+}

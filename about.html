@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About — DeadLeaf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="css/theme-vars.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+<div class="top-bar">
+  <div class="menu-left">
+    <span id="menu-btn" aria-label="Open menu">☰</span>
+    <a href="index.html" class="brand-link" data-navigate="home">
+      <span class="brand">DeadLeaf</span>
+    </a>
+  </div>
+  <div class="menu-right">
+    <button id="bookmarks-toggle" class="icon-btn" aria-label="Bookmarks">
+      <i class="fas fa-bookmark"></i>
+      <span class="bookmark-count-badge" id="bookmark-count-badge">0</span>
+    </button>
+  </div>
+</div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <img src="images/deadleaf.png" alt="DeadLeaf" class="sidebar-logo">
+    <span id="close-btn" aria-label="Close menu">✕</span>
+  </div>
+  <a href="#" data-navigate="home">Home</a>
+  <a href="#" data-navigate="library">Library</a>
+  <a href="#" id="sidebar-bookmarks">Bookmarks</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="terms.html">Terms</a>
+  <!-- Auth links - will be hidden when logged in -->
+  <a href="login.html">Sign In</a>
+  <a href="signup.html">Sign Up</a>
+  <div class="theme-controls">
+    <p>Theme</p>
+    <div class="theme-switcher">
+      <button data-set-theme="dark">Dark</button>
+      <button data-set-theme="sepia">Sepia</button>
+      <button data-set-theme="night">Night</button>
+    </div>
+  </div>
+</div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- About Content -->
+  <div class="about-container">
+    <!-- Hero Section -->
+    <div class="about-hero">
+      <div class="about-hero-content">
+        <h1>About DeadLeaf</h1>
+        <p class="about-subtitle">A quiet place to read — without downloads, without noise, without distraction.</p>
+        <div class="about-divider"></div>
+      </div>
+    </div>
+
+    <!-- Creator Section - Personal Touch -->
+    <div class="creator-section">
+      <div class="creator-card">
+        <div class="creator-avatar-large">
+          <i class="fas fa-user-astronaut"></i>
+        </div>
+        <h2>Sahil Verma</h2>
+        <p class="creator-title">Founder & Solo Creator</p>
+        <p class="creator-description">
+          Writer, 3D Modeler, Game Developer, Web Designer — and everything else behind DeadLeaf.
+          From movie scripts to anime concepts, stories to code, every pixel and line of text is crafted personally.
+        </p>
+        <div class="creator-signature">サヒル</div>
+      </div>
+    </div>
+
+    <!-- The Story -->
+    <div class="about-section">
+      <div class="about-section-content">
+        <h2>The Story</h2>
+        <p>DeadLeaf began as a personal project — a reaction to the noisy reading platforms that interrupt the very thing they're meant to provide: peace.</p>
+        <p>As a writer myself, I wanted a space where stories could be experienced without distractions. Where the interface fades away and only the words remain. Where reading feels like it should — quiet, personal, uninterrupted.</p>
+        <p>Every line of code, every design decision, every feature is built with one philosophy: respect the reader's attention.</p>
+      </div>
+      <div class="about-section-image">
+        <div class="image-placeholder">
+          <i class="fas fa-leaf"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- One-Man Army Section -->
+    <div class="about-section alternate">
+      <div class="about-section-image">
+        <div class="image-placeholder">
+          <i class="fas fa-code"></i>
+        </div>
+      </div>
+      <div class="about-section-content">
+        <h2>One Person, Many Hats</h2>
+        <p>DeadLeaf isn't a team — it's just me. Everything you see is built by one pair of hands:</p>
+        <ul class="role-list">
+          <li><i class="fas fa-paint-brush"></i> <strong>Designer</strong> — Every pixel, every animation</li>
+          <li><i class="fas fa-code"></i> <strong>Developer</strong> — Frontend, backend, all the code</li>
+          <li><i class="fas fa-headset"></i> <strong>Support</strong> — If you need help, you're talking to me</li>
+          <li><i class="fas fa-tasks"></i> <strong>Management</strong> — Planning, organizing, dreaming</li>
+          <li><i class="fas fa-pen-fancy"></i> <strong>Writer</strong> — Movie scripts, anime concepts, stories</li>
+          <li><i class="fas fa-cube"></i> <strong>3D Modeler</strong> — Creating worlds in three dimensions</li>
+          <li><i class="fas fa-gamepad"></i> <strong>Game Developer</strong> — Interactive storytelling</li>
+        </ul>
+        <p class="note">It's a lot of hats, but someone's got to wear them.</p>
+      </div>
+    </div>
+
+    <!-- Max Studios -->
+    <div class="studio-section">
+      <div class="studio-content">
+        <h2>A Max Studios Creation</h2>
+        <div class="studio-badge">
+          <i class="fas fa-film"></i>
+          <span>MAX STUDIOS</span>
+        </div>
+        <p>DeadLeaf is a proud child brand of Max Studios — my personal creative umbrella. From games to scripts, 3D art to reading platforms, Max Studios is where all my creative work lives.</p>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="about-section">
+      <div class="about-section-content">
+        <h2>Built for Readers</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <i class="fas fa-moon"></i>
+            <h3>Three Themes</h3>
+            <p>Dark, Night, and Sepia — choose what's easy on your eyes</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-text-height"></i>
+            <h3>Font Controls</h3>
+            <p>Adjust size to your comfort, save preferences per book</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-bookmark"></i>
+            <h3>Smart Bookmarks</h3>
+            <p>Save your favorite moments, return to them anytime</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-chart-line"></i>
+            <h3>Reading Stats</h3>
+            <p>Track your progress, set goals, build streaks</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-section-image">
+        <div class="image-placeholder">
+          <i class="fas fa-heart"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Philosophy -->
+    <div class="philosophy-section">
+      <div class="philosophy-quote-large">
+        <i class="fas fa-quote-left"></i>
+        <blockquote>"The quieter you become, the more you can hear."</blockquote>
+        <cite>— Ram Dass</cite>
+      </div>
+      <p class="philosophy-text">This is the heart of DeadLeaf. No notifications. No pop-ups. No distractions. Just you and the story.</p>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="about-cta">
+      <h2>Have something to say?</h2>
+      <p>I read every message. No bots, no automation — just me.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="cta-button primary">Contact Me</a>
+        <a href="#" data-navigate="library" class="cta-button secondary">Start Reading</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a> • 
+      <a href="library.html">Library</a> • 
+      <a href="about.html">About</a> • 
+      <a href="contact.html">Contact</a> • 
+      <a href="privacy.html">Privacy</a> • 
+      <a href="terms.html">Terms</a>
+    </div>
+    <p>© 2025 DeadLeaf — A Max Studios creation. All rights reserved.</p>
+  </footer>
+
+  <!-- CORRECT SCRIPT ORDER - Replace your current script section -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/auth-state.js"></script>
+</body>
+</html>

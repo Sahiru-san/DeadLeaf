@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terms of Service — DeadLeaf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="css/theme-vars.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/legal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="menu-left">
+      <span id="menu-btn" aria-label="Open menu">☰</span>
+      <a href="index.html" class="brand-link" data-navigate="home">
+        <span class="brand">DeadLeaf</span>
+      </a>
+    </div>
+    <div class="menu-right">
+      <button id="bookmarks-toggle" class="icon-btn" aria-label="Bookmarks">
+        <i class="fas fa-bookmark"></i>
+        <span class="bookmark-count-badge" id="bookmark-count-badge">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <img src="images/deadleaf.png" alt="DeadLeaf" class="sidebar-logo">
+    <span id="close-btn" aria-label="Close menu">✕</span>
+  </div>
+  <a href="#" data-navigate="home">Home</a>
+  <a href="#" data-navigate="library">Library</a>
+  <a href="#" id="sidebar-bookmarks">Bookmarks</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="terms.html">Terms</a>
+  <!-- Auth links - will be hidden when logged in -->
+  <a href="login.html">Sign In</a>
+  <a href="signup.html">Sign Up</a>
+  <div class="theme-controls">
+    <p>Theme</p>
+    <div class="theme-switcher">
+      <button data-set-theme="dark">Dark</button>
+      <button data-set-theme="sepia">Sepia</button>
+      <button data-set-theme="night">Night</button>
+    </div>
+  </div>
+</div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Legal Content -->
+  <div class="legal-container">
+    <div class="legal-header">
+      <h1>Terms of Service</h1>
+      <p class="legal-date">Last updated: February 21, 2026</p>
+    </div>
+    
+    <div class="legal-content">
+      <section class="legal-section">
+        <h2>Simple and Fair</h2>
+        <p>DeadLeaf is built for readers. Our terms are simple: use the platform respectfully, and we'll provide the best reading experience possible.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Free to Use</h2>
+        <p>DeadLeaf is completely free. No hidden costs, no premium tiers, no paywalls. Reading should be accessible to everyone.</p>
+        <p>In the future, we may introduce a optional supporter pass for those who want to support the project, but the core experience will always remain free.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>User Accounts</h2>
+        <p>You are responsible for maintaining your account security. We never ask for your password outside of the login page.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Content Ownership</h2>
+        <p>All books and content available on DeadLeaf are either in the public domain, used with permission, or original creations. We respect intellectual property rights and respond to valid copyright claims.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>User Content</h2>
+        <p>Bookmarks and notes you create belong to you. We don't claim ownership of your saved content.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>No Warranty</h2>
+        <p>DeadLeaf is provided "as is" without warranties. While we strive for perfection, we're human — occasional bugs may appear. We'll fix them as quickly as possible.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Changes to Terms</h2>
+        <p>If we update these terms, we'll notify you through the platform. Continued use means you accept the changes.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Contact</h2>
+        <p>For any questions about these terms, reach out at <a href="mailto:max.works.help@gmail.com">max.works.help@gmail.com</a></p>
+      </section>
+    </div>
+
+    <div class="legal-footer">
+      <a href="#" data-navigate="back" class="back-link">← Back</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a> • 
+      <a href="library.html">Library</a> • 
+      <a href="about.html">About</a> • 
+      <a href="contact.html">Contact</a> • 
+      <a href="privacy.html">Privacy</a> • 
+      <a href="terms.html">Terms</a>
+    </div>
+    <p>© 2025 DeadLeaf — A Max Studios creation. All rights reserved.</p>
+  </footer>
+
+<!-- CORRECT SCRIPT ORDER - Replace your current script section -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/auth-state.js"></script>
+</body>
+</html>
