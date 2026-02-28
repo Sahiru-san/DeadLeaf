@@ -152,11 +152,14 @@
     <p>© 2025 DeadLeaf — A Max Studios creation. All rights reserved.</p>
   </footer>
 
-  <script src="js/menu.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/navigation.js"></script>
-  <script src="js/bookmarks.js"></script>
-  <script src="js/auth-state.js"></script>
-  <script src="js/profile.js"></script>
-</body>
+  <!-- CORRECT SCRIPT ORDER - CRITICAL -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/bookmarks.js"></script>
+<script src="js/auth-state.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/ad-modal.js"></script>
 </html>

@@ -59,8 +59,7 @@ class AdManager {
     
     container.innerHTML = `
       <video id="ad-video" width="100%" controls autoplay>
-        <source src="path/to/your/ad.mp4" type="video/mp4">
-        Your browser does not support video ads.
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
       </video>
     `;
     
