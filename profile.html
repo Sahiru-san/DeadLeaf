@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <!-- Sidebar (updated with Profile link) -->
+  <!-- Sidebar -->
   <div id="sidebar" class="sidebar">
     <div class="sidebar-header">
       <img src="images/deadleaf.png" alt="DeadLeaf" class="sidebar-logo">
@@ -40,7 +40,7 @@
     <a href="#" data-navigate="home">Home</a>
     <a href="#" data-navigate="library">Library</a>
     <a href="#" id="sidebar-bookmarks">Bookmarks</a>
-    <a href="profile.html" class="profile-link">Profile</a> <!-- NEW -->
+    <a href="profile.html" class="profile-link">Profile</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
     <a href="privacy.html">Privacy</a>
@@ -66,7 +66,7 @@
       <!-- User Info -->
       <div class="profile-section" id="profile-info">
         <div class="avatar-section">
-          <div class="avatar">
+          <div class="avatar" id="avatar-display">
             <i class="fas fa-user-circle"></i>
           </div>
           <button class="edit-avatar-btn" id="edit-avatar">
@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <!-- Inline Edit Modal (hidden by default) -->
+      <!-- Edit Name Modal -->
       <div class="edit-modal" id="edit-name-modal" style="display: none;">
         <div class="edit-modal-content">
           <h3>Edit your name</h3>
@@ -112,7 +112,7 @@
         </div>
       </div>
 
-      <!-- Avatar Upload Modal (hidden by default) -->
+      <!-- Avatar Upload Modal - UPDATED with correct IDs -->
       <div class="edit-modal" id="avatar-upload-modal" style="display: none;">
         <div class="edit-modal-content upload-modal">
           <h3>Update Profile Picture</h3>
@@ -139,7 +139,7 @@
             </div>
           </div>
 
-          <!-- Image Editor (shows after selection) -->
+          <!-- Image Editor -->
           <div class="image-editor" id="image-editor" style="display: none;">
             <div class="crop-container">
               <img id="crop-image" src="" alt="Preview">
@@ -159,7 +159,7 @@
             <span class="progress-text" id="progress-text">Uploading...</span>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- Action Buttons - UPDATED: cancel-avatar-edit and save-avatar -->
           <div class="edit-actions">
             <button class="edit-cancel-btn" id="cancel-avatar-edit">Cancel</button>
             <button class="edit-save-btn" id="save-avatar" style="display: none;">
@@ -233,7 +233,7 @@
     <p>© 2025 DeadLeaf — A Max Studios creation. All rights reserved.</p>
   </footer>
 
-  <!-- CORRECT SCRIPT ORDER - CRITICAL -->
+  <!-- Scripts - CORRECT ORDER -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
   <script src="js/menu.js"></script>
@@ -244,5 +244,6 @@
   <script src="js/profile.js"></script>
   <script src="js/avatar.js"></script>
   <script src="js/ad-modal.js"></script>
+</body>
 
 </html>

@@ -373,26 +373,69 @@
   to { transform: rotate(360deg); }
 }
 /* ================= AVATAR UPLOAD STYLES ================= */
-.upload-modal {
-  max-width: 500px;
+/* ================= AVATAR SECTION ================= */
+.avatar-section {
+  position: relative;
+  width: 120px;
+  margin: 0 auto 20px;
 }
 
-.avatar-preview-section {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.avatar-preview {
+.avatar {
   width: 120px;
   height: 120px;
-  margin: 0 auto 10px;
-  border-radius: 50%;
+  border-radius: 50%;  /* This makes it circular */
   background: var(--bg-secondary);
   border: 3px solid var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 80px;
+  font-size: 70px;
+  color: var(--accent);
+  overflow: hidden;  /* Critical for image cropping */
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Makes image fill circle properly */
+  border-radius: 50%;  /* Ensures image is circular */
+}
+
+.edit-avatar-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-card);
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.edit-avatar-btn:hover {
+  transform: scale(1.1);
+  background: var(--accent-soft);
+}
+
+/* Avatar Preview in Modal */
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 10px;
+  border-radius: 50%;  /* Circular preview */
+  background: var(--bg-secondary);
+  border: 3px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
   color: var(--accent);
   overflow: hidden;
 }
@@ -401,6 +444,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .preview-hint {
