@@ -63,6 +63,8 @@ class AdManager {
     container.innerHTML = `
       <video id="ad-video" width="100%" height="100%" style="object-fit: cover;" autoplay>
         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/webm">
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
       </video>
     `;
     

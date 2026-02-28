@@ -122,30 +122,172 @@ function setupEventListeners(user) {
     });
   }
   
-  // Handle edit name
-  const editBtn = document.getElementById('edit-name');
-  if (editBtn) {
-    editBtn.addEventListener('click', async () => {
-      const currentName = document.getElementById('display-name').textContent;
-      const newName = prompt('Enter your name:', currentName);
+  // Add this to your profile.js - replaces the old edit name function
+
+// Handle edit name - NEW INLINE VERSION
+const editBtn = document.getElementById('edit-name');
+const editModal = document.getElementById('edit-name-modal');
+const editInput = document.getElementById('edit-name-input');
+const cancelBtn = document.getElementById('cancel-edit');
+const saveBtn = document.getElementById('save-edit');
+const charCount = document.getElementById('char-count');
+
+if (editBtn && editModal) {
+  editBtn.addEventListener('click', () => {
+    // Get current name
+    const currentName = document.getElementById('display-name').textContent;
+    editInput.value = currentName;
+    charCount.textContent = `${currentName.length}/50`;
+    
+    // Show modal
+    editModal.style.display = 'flex';
+    
+    // Focus input
+    setTimeout(() => editInput.focus(), 100);
+  });
+  
+  // Character counter
+  editInput.addEventListener('input', () => {
+    const len = editInput.value.length;
+    charCount.textContent = `${len}/50`;
+    
+    // Visual feedback when near limit
+    if (len > 45) {
+      charCount.style.color = '#ff6b6b';
+    } else {
+      charCount.style.color = 'var(--text-muted)';
+    }
+  });
+  
+  // Handle save
+  saveBtn.addEventListener('click', async () => {
+    const newName = editInput.value.trim();
+    
+    if (!newName) {
+      showEditError('Name cannot be empty');
+      return;
+    }
+    
+    // Show loading state
+    saveBtn.classList.add('loading');
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    
+    try {
+      // Update in Supabase
+      const { error } = await window.supabase.auth.updateUser({
+        data: { full_name: newName }
+      });
       
-      if (newName && newName !== currentName) {
-        try {
-          const { error } = await window.supabase.auth.updateUser({
-            data: { full_name: newName }
-          });
-          
-          if (error) throw error;
-          
-          document.getElementById('display-name').textContent = newName;
-          showToast('Name updated successfully!');
-          
-        } catch (error) {
-          alert('Failed to update name: ' + error.message);
-        }
-      }
-    });
+      if (error) throw error;
+      
+      // Update display
+      document.getElementById('display-name').textContent = newName;
+      
+      // Close modal
+      editModal.style.display = 'none';
+      
+      // Show success message
+      showEditSuccess('Name updated successfully!');
+      
+    } catch (error) {
+      console.error('Update failed:', error);
+      showEditError('Failed to update name. Please try again.');
+    } finally {
+      // Reset button
+      saveBtn.classList.remove('loading');
+      saveBtn.innerHTML = '<i class="fas fa-check"></i> Save Changes';
+    }
+  });
+  
+  // Handle cancel
+  cancelBtn.addEventListener('click', () => {
+    editModal.style.display = 'none';
+  });
+  
+  // Close on click outside
+  editModal.addEventListener('click', (e) => {
+    if (e.target === editModal) {
+      editModal.style.display = 'none';
+    }
+  });
+  
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && editModal.style.display === 'flex') {
+      editModal.style.display = 'none';
+    }
+  });
+}
+
+// Helper functions for edit feedback
+function showEditError(message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'edit-error';
+  errorDiv.textContent = message;
+  errorDiv.style.cssText = `
+    background: rgba(255, 69, 58, 0.1);
+    color: #ff453a;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    border-left: 3px solid #ff453a;
+  `;
+  
+  const modalContent = document.querySelector('.edit-modal-content');
+  const existingError = modalContent.querySelector('.edit-error');
+  if (existingError) existingError.remove();
+  
+  modalContent.insertBefore(errorDiv, modalContent.querySelector('.edit-input-group'));
+  
+  setTimeout(() => {
+    if (errorDiv.parentNode) errorDiv.remove();
+  }, 3000);
+}
+
+function showEditSuccess(message) {
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #000;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 500;
+    z-index: 10001;
+    animation: slideUpToast 0.3s ease, fadeOut 2s ease 1.7s forwards;
+  `;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// Add keyframe animation for toast
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideUpToast {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
   }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+    }
+  }
+`;
+document.head.appendChild(style);
   
   // Handle settings toggles (save to localStorage for now)
   const emailNotifications = document.getElementById('email-notifications');

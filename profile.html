@@ -89,6 +89,27 @@
         </div>
       </div>
 
+<!-- Inline Edit Modal (hidden by default) -->
+<div class="edit-modal" id="edit-name-modal" style="display: none;">
+  <div class="edit-modal-content">
+    <h3>Edit your name</h3>
+    <p class="edit-subtitle">This is how you'll appear across DeadLeaf</p>
+    
+    <div class="edit-input-group">
+      <input type="text" id="edit-name-input" class="edit-input" placeholder="Enter your name" maxlength="50">
+      <div class="input-char-count" id="char-count">0/50</div>
+    </div>
+    
+    <div class="edit-actions">
+      <button class="edit-cancel-btn" id="cancel-edit">Cancel</button>
+      <button class="edit-save-btn" id="save-edit">
+        <i class="fas fa-check"></i>
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>
+
       <!-- Reading Stats -->
       <div class="profile-section">
         <h2>Reading Stats</h2>
