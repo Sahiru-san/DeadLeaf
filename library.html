@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <!-- Top Bar - FIXED: Now uses text brand -->
+  <!-- Top Bar -->
   <div class="top-bar">
     <div class="menu-left">
       <span id="menu-btn" aria-label="Open menu">☰</span>
@@ -28,32 +28,32 @@
     </div>
   </div>
 
-  <!-- Sidebar - FIXED: Added auth links -->
+  <!-- Sidebar -->
   <div id="sidebar" class="sidebar">
-  <div class="sidebar-header">
-    <img src="images/deadleaf.png" alt="DeadLeaf" class="sidebar-logo">
-    <span id="close-btn" aria-label="Close menu">✕</span>
-  </div>
-  <a href="#" data-navigate="home">Home</a>
-  <a href="#" data-navigate="library">Library</a>
-  <a href="#" id="sidebar-bookmarks">Bookmarks</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="privacy.html">Privacy</a>
-  <a href="profile.html">Profile</a>
-  <a href="terms.html">Terms</a>
-  <!-- Auth links - will be hidden when logged in -->
-  <a href="login.html">Sign In</a>
-  <a href="signup.html">Sign Up</a>
-  <div class="theme-controls">
-    <p>Theme</p>
-    <div class="theme-switcher">
-      <button data-set-theme="dark">Dark</button>
-      <button data-set-theme="sepia">Sepia</button>
-      <button data-set-theme="night">Night</button>
+    <div class="sidebar-header">
+      <img src="images/deadleaf.png" alt="DeadLeaf" class="sidebar-logo">
+      <span id="close-btn" aria-label="Close menu">✕</span>
+    </div>
+    <a href="#" data-navigate="home">Home</a>
+    <a href="#" data-navigate="library">Library</a>
+    <a href="#" id="sidebar-bookmarks">Bookmarks</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="profile.html">Profile</a>
+    <a href="terms.html">Terms</a>
+    <!-- Auth links -->
+    <a href="login.html">Sign In</a>
+    <a href="signup.html">Sign Up</a>
+    <div class="theme-controls">
+      <p>Theme</p>
+      <div class="theme-switcher">
+        <button data-set-theme="dark">Dark</button>
+        <button data-set-theme="sepia">Sepia</button>
+        <button data-set-theme="night">Night</button>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- Overlay -->
   <div id="overlay" class="overlay"></div>
@@ -187,51 +187,34 @@
       </div>
     </div>
 
-    <!-- CATEGORIES -->
+    <!-- CATEGORIES - FIXED IDs to match JavaScript -->
 
-<!-- Manga Section with See All -->
-<div class="category-header">
-  <h2 class="category-title">Manga</h2>
-  <a href="category.html?type=manga" class="see-all-link">See All →</a>
-</div>
-<div class="horizontal-scroll" id="manga-scroll">
-  <div class="card skeleton" data-book-id="1" data-title="Alice in Borderlands" data-total-chapters="328" data-last-chapter="12" data-category="Manga"></div>
-  <div class="card skeleton" data-book-id="2" data-title="Death Note" data-total-chapters="108" data-last-chapter="0" data-category="Manga"></div>
-  <div class="card skeleton" data-book-id="3" data-title="Monster" data-total-chapters="162" data-last-chapter="45" data-category="Manga"></div>
-  <div class="card skeleton" data-book-id="4" data-title="Berserk" data-total-chapters="364" data-last-chapter="0" data-category="Manga"></div>
-  <div class="card skeleton" data-book-id="13" data-title="Attack on Titan" data-total-chapters="139" data-last-chapter="0" data-category="Manga"></div>
-  <div class="card skeleton" data-book-id="14" data-title="One Piece" data-total-chapters="1089" data-last-chapter="0" data-category="Manga"></div>
-  <div class="card skeleton" data-book-id="15" data-title="Naruto" data-total-chapters="700" data-last-chapter="0" data-category="Manga"></div>
-  <div class="card skeleton" data-book-id="16" data-title="Demon Slayer" data-total-chapters="205" data-last-chapter="0" data-category="Manga"></div>
-</div>
+    <!-- Manga Section -->
+    <div class="category-header">
+      <h2 class="category-title">Manga</h2>
+      <a href="category.html?type=manga" class="see-all-link">See All →</a>
+    </div>
+    <div class="horizontal-scroll" id="manga-scroll">
+      <!-- Books will be loaded here by JavaScript -->
+    </div>
 
-<!-- Manhwa Section with See All -->
-<div class="category-header">
-  <h2 class="category-title">Manhwa</h2>
-  <a href="category.html?type=manhwa" class="see-all-link">See All →</a>
-</div>
-<div class="horizontal-scroll" id="manhwa-scroll">
-  <div class="card skeleton" data-book-id="5" data-title="Solo Leveling" data-total-chapters="179" data-last-chapter="89" data-category="Manhwa"></div>
-  <div class="card skeleton" data-book-id="6" data-title="Tower of God" data-total-chapters="158" data-last-chapter="0" data-category="Manhwa"></div>
-  <div class="card skeleton" data-book-id="7" data-title="The Breaker" data-total-chapters="82" data-last-chapter="30" data-category="Manhwa"></div>
-  <div class="card skeleton" data-book-id="8" data-title="Noblesse" data-total-chapters="220" data-last-chapter="0" data-category="Manhwa"></div>
-  <div class="card skeleton" data-book-id="17" data-title="The Beginning After the End" data-total-chapters="182" data-last-chapter="0" data-category="Manhwa"></div>
-  <div class="card skeleton" data-book-id="18" data-title="Omniscient Reader" data-total-chapters="189" data-last-chapter="0" data-category="Manhwa"></div>
-</div>
+    <!-- Manhwa Section -->
+    <div class="category-header">
+      <h2 class="category-title">Manhwa</h2>
+      <a href="category.html?type=manhwa" class="see-all-link">See All →</a>
+    </div>
+    <div class="horizontal-scroll" id="manhwa-scroll">
+      <!-- Books will be loaded here by JavaScript -->
+    </div>
 
-<!-- Books Section with See All -->
-<div class="category-header">
-  <h2 class="category-title">Books</h2>
-  <a href="category.html?type=books" class="see-all-link">See All →</a>
-</div>
-<div class="horizontal-scroll" id="books-scroll">
-  <div class="card skeleton" data-book-id="9" data-title="1984" data-total-chapters="45" data-last-chapter="12" data-category="Books"></div>
-  <div class="card skeleton" data-book-id="10" data-title="Dune" data-total-chapters="67" data-last-chapter="0" data-category="Books"></div>
-  <div class="card skeleton" data-book-id="11" data-title="Foundation" data-total-chapters="52" data-last-chapter="0" data-category="Books"></div>
-  <div class="card skeleton" data-book-id="12" data-title="The Hobbit" data-total-chapters="38" data-last-chapter="20" data-category="Books"></div>
-  <div class="card skeleton" data-book-id="19" data-title="The Name of the Wind" data-total-chapters="92" data-last-chapter="0" data-category="Books"></div>
-  <div class="card skeleton" data-book-id="20" data-title="Mistborn" data-total-chapters="38" data-last-chapter="0" data-category="Books"></div>
-</div>
+    <!-- Books Section -->
+    <div class="category-header">
+      <h2 class="category-title">Books</h2>
+      <a href="category.html?type=books" class="see-all-link">See All →</a>
+    </div>
+    <div class="horizontal-scroll" id="books-scroll">
+      <!-- Books will be loaded here by JavaScript -->
+    </div>
 
     <!-- No Results Message -->
     <div class="no-results" id="no-results">
@@ -268,55 +251,120 @@
     </div>
   </div>
 
-  <!--scripts-->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase.js"></script>
-  <script src="js/menu.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/navigation.js"></script>
-  <script src="js/library-search.js"></script>
-  <script src="js/reading-progress.js"></script>
-  <script src="js/bookmarks.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/auth-state.js"></script>
-  <script src="js/reading-stats.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/library-search.js"></script>
+<script src="js/reading-progress.js"></script>
+<script src="js/bookmarks.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/auth-state.js"></script>
+<script src="js/reading-stats.js"></script>
+<script src="js/library.js"></script>
 
-  <!-- Library loading simulation -->
+  <!-- REMOVED the old setTimeout skeleton script - no longer needed -->
+
   <script>
-    setTimeout(() => {
-      document.querySelectorAll('.skeleton').forEach(skeleton => {
-        skeleton.classList.remove('skeleton');
-        
-        const title = skeleton.dataset.title;
-        const lastChapter = parseInt(skeleton.dataset.lastChapter) || 0;
-        const totalChapters = parseInt(skeleton.dataset.totalChapters) || 100;
-        const progress = lastChapter > 0 ? ((lastChapter / totalChapters) * 100).toFixed(1) : 0;
-        
-        skeleton.setAttribute('data-progress', progress);
-        
-        if (lastChapter > 0) {
-          skeleton.innerHTML = `
-            <div class="card-content">
-              <div class="card-title">${title}</div>
-              <div class="card-progress">
-                <span class="card-progress-text">${progress}%</span>
-                <div class="card-progress-bar">
-                  <div class="card-progress-fill" style="width: ${progress}%"></div>
-                </div>
-              </div>
-            </div>
-          `;
-        } else {
-          skeleton.innerHTML = `
-            <div class="card-content">
-              <div class="card-title">${title}</div>
-            </div>
-          `;
-        }
-      });
+  // REAL DATA - Fetch from Supabase
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      // Show loading skeletons (they're already in HTML)
+      
+      // Fetch books from Supabase
+      const { data: books, error } = await window.supabase
+        .from('books')
+        .select('*')
+        .order('id');
+      
+      if (error) throw error;
+      
+      if (!books || books.length === 0) {
+        console.log('No books found in database');
+        // Show empty state
+        document.querySelectorAll('.horizontal-scroll').forEach(scroll => {
+          scroll.innerHTML = '<div class="empty-message">No books available</div>';
+        });
+        return;
+      }
+      
+      console.log('Fetched books:', books);
+      
+      // Categorize books
+      const mangaBooks = books.filter(b => b.category === 'Manga');
+      const manhwaBooks = books.filter(b => b.category === 'Manhwa');
+      const booksCategory = books.filter(b => b.category === 'Books');
+      
+      // Render books in horizontal scroll sections
+      renderBooks('manga-scroll', mangaBooks);
+      renderBooks('manhwa-scroll', manhwaBooks);
+      renderBooks('books-scroll', booksCategory);
       
       document.dispatchEvent(new CustomEvent('booksLoaded'));
-    }, 1500);
-  </script>
+      
+    } catch (error) {
+      console.error('Error loading books:', error);
+    }
+  });
+  
+  function renderBooks(containerId, books) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+      console.warn(`Container ${containerId} not found`);
+      return;
+    }
+    
+    container.innerHTML = ''; // Clear skeletons
+    
+    if (books.length === 0) {
+      container.innerHTML = '<div class="empty-message">No books available</div>';
+      return;
+    }
+    
+    books.forEach(book => {
+      const card = createBookCard(book);
+      container.appendChild(card);
+    });
+  }
+  
+  function createBookCard(book) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.setAttribute('data-book-id', book.id);
+    card.onclick = () => Navigation.goTo.title(book.id);
+    
+    // Get reading progress from localStorage (temporary)
+    const lastChapter = parseInt(localStorage.getItem(`lastChapter_${book.id}`)) || 0;
+    const progress = lastChapter > 0 && book.total_chapters > 0
+      ? ((lastChapter / book.total_chapters) * 100).toFixed(1)
+      : 0;
+    
+    card.setAttribute('data-progress', progress);
+    
+    if (progress > 0) {
+      card.innerHTML = `
+        <div class="card-content">
+          <div class="card-title">${book.title}</div>
+          <div class="card-progress">
+            <span class="card-progress-text">${progress}%</span>
+            <div class="card-progress-bar">
+              <div class="card-progress-fill" style="width: ${progress}%"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      card.innerHTML = `
+        <div class="card-content">
+          <div class="card-title">${book.title}</div>
+        </div>
+      `;
+    }
+    
+    return card;
+  }
+</script>
 </body>
 </html>
