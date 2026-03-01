@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Category - DeadLeaf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="css/theme-vars.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/category.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="menu-left">
+      <span id="menu-btn" aria-label="Open menu">☰</span>
+      <a href="index.html" class="brand-link" data-navigate="home">
+        <span class="brand">DeadLeaf</span>
+      </a>
+    </div>
+    <div class="menu-right">
+      <button id="bookmarks-toggle" class="icon-btn" aria-label="Bookmarks">
+        <i class="fas fa-bookmark"></i>
+        <span class="bookmark-count-badge" id="bookmark-count-badge">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <img src="images/deadleaf.png" alt="DeadLeaf" class="sidebar-logo">
+      <span id="close-btn" aria-label="Close menu">✕</span>
+    </div>
+    <a href="#" data-navigate="home">Home</a>
+    <a href="#" data-navigate="library">Library</a>
+    <a href="#" id="sidebar-bookmarks">Bookmarks</a>
+    <a href="profile.html">Profile</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <div class="theme-controls">
+      <p>Theme</p>
+      <div class="theme-switcher">
+        <button data-set-theme="dark">Dark</button>
+        <button data-set-theme="sepia">Sepia</button>
+        <button data-set-theme="night">Night</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Back Button -->
+  <div class="back-btn-container">
+    <a href="library.html" class="back-btn">← Back to Library</a>
+  </div>
+
+  <!-- Category Content -->
+  <div class="category-container">
+    
+    <!-- Category Header -->
+    <div class="category-header-large">
+      <div>
+        <h1 id="category-name">Manga</h1>
+        <p id="category-count" class="category-count">24 titles</p>
+      </div>
+      
+      <!-- Sort Options -->
+      <div class="sort-dropdown">
+        <button class="sort-btn" id="sort-btn">
+          <i class="fas fa-sort"></i>
+          Sort by <span id="current-sort">Latest</span>
+        </button>
+        <div class="sort-menu" id="sort-menu">
+          <div class="sort-option" data-sort="latest">Latest</div>
+          <div class="sort-option" data-sort="popular">Most Popular</div>
+          <div class="sort-option" data-sort="a-z">A-Z</div>
+          <div class="sort-option" data-sort="z-a">Z-A</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Chips -->
+    <div class="filter-chips" id="filter-chips">
+      <span class="chip active" data-filter="all">All</span>
+      <span class="chip" data-filter="ongoing">Ongoing</span>
+      <span class="chip" data-filter="completed">Completed</span>
+      <span class="chip" data-filter="popular">Popular</span>
+      <span class="chip" data-filter="new">New</span>
+    </div>
+
+    <!-- Books Grid -->
+    <div class="category-grid" id="category-grid">
+      <!-- Skeleton Loaders -->
+      <div class="card skeleton"></div>
+      <div class="card skeleton"></div>
+      <div class="card skeleton"></div>
+      <div class="card skeleton"></div>
+      <div class="card skeleton"></div>
+      <div class="card skeleton"></div>
+      <div class="card skeleton"></div>
+      <div class="card skeleton"></div>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="load-more-container">
+      <button class="load-more-btn" id="load-more">
+        Load More
+        <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+
+    <!-- No Results -->
+    <div class="no-results" id="no-results" style="display: none;">
+      <i class="fas fa-book-open"></i>
+      <h3>No books found</h3>
+      <p>Try adjusting your filters</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a> •
+      <a href="library.html">Library</a> •
+      <a href="about.html">About</a> •
+      <a href="contact.html">Contact</a> •
+      <a href="privacy.html">Privacy</a> •
+      <a href="terms.html">Terms</a>
+    </div>
+    <p>© 2025 DeadLeaf — A Max Studios creation. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/bookmarks.js"></script>
+  <script src="js/auth-state.js"></script>
+  <script src="js/category.js"></script>
+</body>
+</html>
