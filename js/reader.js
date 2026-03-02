@@ -191,33 +191,53 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupFontControls();
   }
   
-  /* ---------- FONT SIZE CONTROLS ---------- */
-  function setupFontControls() {
-    let fontSize = parseInt(localStorage.getItem("readerFontSize")) || 18;
-    
-    // Apply on load
-    if (readerContent) {
-      readerContent.style.fontSize = fontSize + "px";
-    }
-    
-    // Increase font
-    if (incBtn) {
-      incBtn.addEventListener("click", () => {
-        fontSize = Math.min(fontSize + 1, 26);
-        if (readerContent) readerContent.style.fontSize = fontSize + "px";
-        localStorage.setItem("readerFontSize", fontSize);
-      });
-    }
-    
-    // Decrease font
-    if (decBtn) {
-      decBtn.addEventListener("click", () => {
-        fontSize = Math.max(fontSize - 1, 12);
-        if (readerContent) readerContent.style.fontSize = fontSize + "px";
-        localStorage.setItem("readerFontSize", fontSize);
-      });
-    }
+  /* ---------- FONT SIZE CONTROLS (UPDATED) ---------- */
+function setupFontControls() {
+  // Get both sets of buttons (top bar and sidebar)
+  const incBtn = document.getElementById("reader-font-increase") || document.getElementById("font-increase");
+  const decBtn = document.getElementById("reader-font-decrease") || document.getElementById("font-decrease");
+  const fontSizeIndicator = document.getElementById("font-size-indicator");
+  
+  let fontSize = parseInt(localStorage.getItem("readerFontSize")) || 18;
+  
+  // Apply on load
+  if (readerContent) {
+    readerContent.style.fontSize = fontSize + "px";
   }
+  
+  // Update indicator if it exists
+  if (fontSizeIndicator) {
+    fontSizeIndicator.textContent = fontSize + 'px';
+  }
+  
+  // Increase font
+  if (incBtn) {
+    incBtn.addEventListener("click", () => {
+      fontSize = Math.min(fontSize + 1, 26);
+      if (readerContent) readerContent.style.fontSize = fontSize + "px";
+      localStorage.setItem("readerFontSize", fontSize);
+      
+      // Update indicator
+      if (fontSizeIndicator) {
+        fontSizeIndicator.textContent = fontSize + 'px';
+      }
+    });
+  }
+  
+  // Decrease font
+  if (decBtn) {
+    decBtn.addEventListener("click", () => {
+      fontSize = Math.max(fontSize - 1, 12);
+      if (readerContent) readerContent.style.fontSize = fontSize + "px";
+      localStorage.setItem("readerFontSize", fontSize);
+      
+      // Update indicator
+      if (fontSizeIndicator) {
+        fontSizeIndicator.textContent = fontSize + 'px';
+      }
+    });
+  }
+}
   
   /* ---------- PROGRESS BAR ---------- */
   function updateProgress() {
