@@ -395,3 +395,24 @@ body {
 /* Add at the end of reader.css */
 @import url('bookmarks.css');
 
+/* Loading state for reader */
+.reader-loading {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.reader-loading i {
+  font-size: 40px;
+  color: var(--accent);
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.reader-loading p {
+  color: var(--text-muted);
+}

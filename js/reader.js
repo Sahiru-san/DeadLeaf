@@ -1,12 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+// js/reader.js - Load real chapter content from Supabase
+document.addEventListener("DOMContentLoaded", async () => {
   // Get URL parameters using Navigation
   const params = Navigation.getParams();
   const bookId = params.bookId;
   const chapterParam = params.chapter;
   
-  // Configuration
-  const maxChapters = 50;
-  let currentChapter = 1;
+  console.log('Loading reader:', { bookId, chapterParam });
   
   // Elements
   const chapterTitle = document.querySelector("#chapter-content h2");
@@ -29,75 +28,239 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Variables
   let hideTimeout;
+  let currentChapter = 1;
+  let totalChapters = 1;
+  let bookData = null;
+  let chaptersData = [];
   
-  /* ---------- CHAPTER LOADING ---------- */
-  function loadChapter(chapterNum) {
-    // In a real app, you would fetch chapter content from an API
-    // using bookId and chapterNum
-    
-    const chapterData = {
-      title: `Chapter ${chapterNum} — The Weight of Silence`,
-      content: `This is the content for Chapter ${chapterNum} of Book ${bookId}. In a real application, this would be loaded from a database or API.
+  /* ---------- FETCH BOOK & CHAPTER DATA ---------- */
+  async function fetchBookData() {
+    try {
+      // Fetch book details to get total chapters
+      const { data: book, error: bookError } = await window.supabase
+        .from('books')
+        .select('*')
+        .eq('id', bookId)
+        .single();
       
-      The rain had stopped sometime before dawn, but the streets still glistened as if the city itself refused to let go of the night.
+      if (bookError) throw bookError;
       
-      He stood at the corner of the street, coat damp, fingers numb, staring at the building across from him. Memories flooded back—some welcome, most not.
+      bookData = book;
+      totalChapters = book.total_chapters || 1;
       
-      "Sometimes," he whispered to no one, "the quiet is louder than the noise."
+      // Fetch all chapters for this book
+      const { data: chapters, error: chaptersError } = await window.supabase
+        .from('chapters')
+        .select('*')
+        .eq('book_id', bookId)
+        .order('chapter_number');
       
-      End of Chapter ${chapterNum}`
-    };
-    
-    if (chapterTitle) chapterTitle.textContent = chapterData.title;
-    if (chapterText) chapterText.textContent = chapterData.content;
-    if (chapterNumber) chapterNumber.textContent = `CH-${chapterNum}`;
+      if (chaptersError) throw chaptersError;
+      
+      chaptersData = chapters || [];
+      console.log(`Loaded ${chaptersData.length} chapters`);
+      
+    } catch (error) {
+      console.error('Error fetching book data:', error);
+      showError('Failed to load book content');
+    }
   }
   
-  /* ---------- CHAPTER NAVIGATION ---------- */
-  function updateChapter() {
+  /* ---------- FETCH SPECIFIC CHAPTER ---------- */
+  async function fetchChapter(chapterNum) {
+    try {
+      // Find chapter in our cached data
+      let chapter = chaptersData.find(c => c.chapter_number === chapterNum);
+      
+      // If not in cache, fetch directly
+      if (!chapter) {
+        const { data, error } = await window.supabase
+          .from('chapters')
+          .select('*')
+          .eq('book_id', bookId)
+          .eq('chapter_number', chapterNum)
+          .single();
+        
+        if (error) throw error;
+        chapter = data;
+      }
+      
+      return chapter;
+      
+    } catch (error) {
+      console.error('Error fetching chapter:', error);
+      return null;
+    }
+  }
+  
+  /* ---------- LOAD CHAPTER ---------- */
+  async function loadChapter(chapterNum) {
+    // Show loading state
+    if (chapterTitle) chapterTitle.textContent = 'Loading...';
+    if (chapterText) chapterText.textContent = 'Please wait while we load the chapter...';
+    
+    const chapter = await fetchChapter(chapterNum);
+    
+    if (!chapter) {
+      // Chapter not found
+      if (chapterTitle) chapterTitle.textContent = `Chapter ${chapterNum}`;
+      if (chapterText) chapterText.textContent = 'This chapter is not available yet.';
+      return;
+    }
+    
+    // Update UI with chapter content
+    if (chapterTitle) {
+      chapterTitle.textContent = chapter.title || `Chapter ${chapterNum}`;
+    }
+    
+    if (chapterText) {
+      // Format content with paragraphs
+      const content = chapter.content || 'No content available.';
+      // Split by double newlines to create paragraphs
+      const paragraphs = content.split('\n\n').filter(p => p.trim());
+      
+      if (paragraphs.length > 1) {
+        // If we have multiple paragraphs, create separate p elements
+        let html = '';
+        paragraphs.forEach(p => {
+          html += `<p>${p.replace(/\n/g, '<br>')}</p>`;
+        });
+        chapterText.innerHTML = html;
+      } else {
+        // Single paragraph
+        chapterText.innerHTML = content.replace(/\n/g, '<br>');
+      }
+    }
+    
+    if (chapterNumber) chapterNumber.textContent = `CH-${chapterNum}`;
+    
+    // Save progress
+    localStorage.setItem(`lastChapter_${bookId}`, chapterNum);
+  }
+  
+  /* ---------- UPDATE CHAPTER (navigation) ---------- */
+  async function updateChapter() {
     // Validate chapter number
-    currentChapter = Math.max(1, Math.min(currentChapter, maxChapters));
+    currentChapter = Math.max(1, Math.min(currentChapter, totalChapters));
     
     // Load chapter content
-    loadChapter(currentChapter);
-    
-    // Save to localStorage with book-specific key
-    localStorage.setItem(`lastChapter_${bookId}`, currentChapter);
+    await loadChapter(currentChapter);
     
     // Update UI state
     if (prevBtn) prevBtn.disabled = currentChapter <= 1;
-    if (nextBtn) nextBtn.disabled = currentChapter >= maxChapters;
+    if (nextBtn) nextBtn.disabled = currentChapter >= totalChapters;
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    // Update progress
+    // Update progress bar
     updateProgress();
     
-    // Update URL without reloading (optional, for bookmarking)
+    // Update URL without reloading
     const url = new URL(window.location);
     url.searchParams.set('ch', currentChapter);
     window.history.replaceState({}, '', url);
   }
   
-  /* ---------- INITIALIZE CHAPTER ---------- */
-  // Priority: URL param > localStorage > default 1
-  if (chapterParam && !isNaN(chapterParam)) {
-    currentChapter = parseInt(chapterParam);
-  } else {
-    const saved = parseInt(localStorage.getItem(`lastChapter_${bookId}`));
-    if (saved && !isNaN(saved)) {
-      currentChapter = Math.min(Math.max(saved, 1), maxChapters);
+  /* ---------- INITIALIZE ---------- */
+  async function init() {
+    // Check if Supabase is available
+    if (!window.supabase) {
+      console.error('Supabase not initialized');
+      showError('System not ready. Please refresh.');
+      return;
+    }
+    
+    // Fetch book data first
+    await fetchBookData();
+    
+    // Determine starting chapter
+    if (chapterParam && !isNaN(chapterParam)) {
+      currentChapter = parseInt(chapterParam);
+    } else {
+      const saved = parseInt(localStorage.getItem(`lastChapter_${bookId}`));
+      if (saved && !isNaN(saved)) {
+        currentChapter = Math.min(Math.max(saved, 1), totalChapters);
+      }
+    }
+    
+    // Load initial chapter
+    await updateChapter();
+    
+    // Set up font size from preferences
+    setupFontControls();
+  }
+  
+  /* ---------- FONT SIZE CONTROLS ---------- */
+  function setupFontControls() {
+    let fontSize = parseInt(localStorage.getItem("readerFontSize")) || 18;
+    
+    // Apply on load
+    if (readerContent) {
+      readerContent.style.fontSize = fontSize + "px";
+    }
+    
+    // Increase font
+    if (incBtn) {
+      incBtn.addEventListener("click", () => {
+        fontSize = Math.min(fontSize + 1, 26);
+        if (readerContent) readerContent.style.fontSize = fontSize + "px";
+        localStorage.setItem("readerFontSize", fontSize);
+      });
+    }
+    
+    // Decrease font
+    if (decBtn) {
+      decBtn.addEventListener("click", () => {
+        fontSize = Math.max(fontSize - 1, 12);
+        if (readerContent) readerContent.style.fontSize = fontSize + "px";
+        localStorage.setItem("readerFontSize", fontSize);
+      });
     }
   }
   
-  // Initial chapter load
-  updateChapter();
+  /* ---------- PROGRESS BAR ---------- */
+  function updateProgress() {
+    if (!progressBar) return;
+    
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    
+    if (docHeight > 0) {
+      const percent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = `${percent}%`;
+      
+      // Show progress bar
+      if (progressWrapper) {
+        progressWrapper.classList.add("active");
+        clearTimeout(hideTimeout);
+        
+        hideTimeout = setTimeout(() => {
+          progressWrapper.classList.remove("active");
+        }, 2000);
+      }
+    }
+  }
+  
+  /* ---------- SHOW ERROR ---------- */
+  function showError(message) {
+    const container = document.querySelector('.reader-container');
+    if (container) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 60px 20px;">
+          <i class="fas fa-exclamation-circle" style="font-size: 48px; color: #ff6b6b; margin-bottom: 20px;"></i>
+          <h2>Unable to load chapter</h2>
+          <p style="color: var(--text-muted); margin-bottom: 30px;">${message}</p>
+          <a href="javascript:history.back()" class="back-btn">Go Back</a>
+        </div>
+      `;
+    }
+  }
   
   /* ---------- EVENT LISTENERS ---------- */
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      if (currentChapter < maxChapters) {
+      if (currentChapter < totalChapters) {
         currentChapter++;
         updateChapter();
       }
@@ -129,55 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (overlay) overlay.addEventListener("click", closeMenu);
   if (closeBtn) closeBtn.addEventListener("click", closeMenu);
   
-  /* ---------- FONT SIZE CONTROLS ---------- */
-  let fontSize = parseInt(localStorage.getItem("readerFontSize")) || 18;
-  
-  // Apply on load
-  if (readerContent) {
-    readerContent.style.fontSize = fontSize + "px";
-  }
-  
-  // Increase font
-  if (incBtn) {
-    incBtn.addEventListener("click", () => {
-      fontSize = Math.min(fontSize + 1, 26);
-      if (readerContent) readerContent.style.fontSize = fontSize + "px";
-      localStorage.setItem("readerFontSize", fontSize);
-    });
-  }
-  
-  // Decrease font
-  if (decBtn) {
-    decBtn.addEventListener("click", () => {
-      fontSize = Math.max(fontSize - 1, 12);
-      if (readerContent) readerContent.style.fontSize = fontSize + "px";
-      localStorage.setItem("readerFontSize", fontSize);
-    });
-  }
-  
-  /* ---------- PROGRESS BAR ---------- */
-  function updateProgress() {
-    if (!progressBar) return;
-    
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    
-    if (docHeight > 0) {
-      const percent = (scrollTop / docHeight) * 100;
-      progressBar.style.width = `${percent}%`;
-      
-      // Show progress bar
-      if (progressWrapper) {
-        progressWrapper.classList.add("active");
-        clearTimeout(hideTimeout);
-        
-        hideTimeout = setTimeout(() => {
-          progressWrapper.classList.remove("active");
-        }, 2000);
-      }
-    }
-  }
-  
+  /* ---------- SCROLL PROGRESS ---------- */
   window.addEventListener("scroll", updateProgress);
   window.addEventListener("resize", updateProgress);
   
@@ -189,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
     switch(e.key) {
       case 'ArrowRight':
       case 'd':
-        if (currentChapter < maxChapters) {
+        if (currentChapter < totalChapters) {
           currentChapter++;
           updateChapter();
         }
@@ -226,36 +341,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const swipeThreshold = 50;
     const diff = touchStartX - touchEndX;
     
-    // Right to left swipe (next)
     if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0 && currentChapter < maxChapters) {
+      if (diff > 0 && currentChapter < totalChapters) {
         currentChapter++;
         updateChapter();
-      } 
-      // Left to right swipe (previous)
-      else if (diff < 0 && currentChapter > 1) {
+      } else if (diff < 0 && currentChapter > 1) {
         currentChapter--;
         updateChapter();
       }
     }
   }
+  
+  // Start the reader
+  init();
 });
-
-// Save reading progress
-async function saveProgress(bookId, chapter, percent) {
-  const { data: { user } } = await supabase.auth.getUser();
-  
-  if (!user) return; // Not logged in
-  
-  const { error } = await supabase
-    .from('reading_progress')
-    .upsert({
-      user_id: user.id,
-      book_id: bookId,
-      chapter: chapter,
-      progress_percent: percent,
-      last_read: new Date()
-    });
-    
-  if (error) console.error('Error saving progress:', error);
-}
