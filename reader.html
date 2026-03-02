@@ -15,42 +15,34 @@
 
 <body>
 
-  <!-- TOP BAR -->
-  <div class="top-bar">
-    <div class="top-left">
-      <span id="menu-btn" aria-label="Open menu">☰</span>
-      <span class="brand">DeadLeaf</span>
-    </div>
-    <div class="top-right">
-      <button class="back-btn" data-navigate="back">Back to Title</button>
-    </div>
-    <!-- In reader.html, update the top-right section -->
-    <div class="top-bar">
-      <div class="top-left">
-        <span id="menu-btn" aria-label="Open menu">☰</span>
-        <span class="brand">DeadLeaf</span>
-      </div>
-      <div class="top-right">
-        <!-- Font Size Controls - NEW -->
-        <div class="reader-font-controls">
-          <button id="reader-font-decrease" class="font-control-btn" aria-label="Decrease font size">
-            <i class="fas fa-minus"></i>
-          </button>
-          <span class="font-size-indicator" id="font-size-indicator">18px</span>
-          <button id="reader-font-increase" class="font-control-btn" aria-label="Increase font size">
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-
-        <button id="bookmarks-toggle" class="icon-btn" aria-label="Bookmarks">
-          <i class="fas fa-bookmark"></i>
-          <span class="bookmark-count-badge" id="bookmark-count-badge">0</span>
-        </button>
-
-        <button class="back-btn" data-navigate="back">Back to Title</button>
-      </div>
-    </div>
+  <!-- TOP BAR - COMPLETE WITH FONT CONTROLS -->
+<div class="top-bar">
+  <div class="top-left">
+    <span id="menu-btn" aria-label="Open menu">☰</span>
+    <span class="brand">DeadLeaf</span>
   </div>
+  <div class="top-right">
+    <!-- Font Size Controls -->
+    <div class="reader-font-controls">
+      <button id="reader-font-decrease" class="font-control-btn" aria-label="Decrease font size">
+        <i class="fas fa-minus"></i>
+      </button>
+      <span class="font-size-indicator" id="font-size-indicator">18px</span>
+      <button id="reader-font-increase" class="font-control-btn" aria-label="Increase font size">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+    
+    <!-- Bookmarks Button -->
+    <button id="bookmarks-toggle" class="icon-btn" aria-label="Bookmarks">
+      <i class="fas fa-bookmark"></i>
+      <span class="bookmark-count-badge" id="bookmark-count-badge">0</span>
+    </button>
+    
+    <!-- Back Button -->
+    <button class="back-btn" data-navigate="back">Back to Title</button>
+  </div>
+</div>
 
   <!-- PROGRESS BAR -->
   <div class="progress-wrapper">
