@@ -330,19 +330,41 @@
   }
   
   function createBookCard(book) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.setAttribute('data-book-id', book.id);
-    card.onclick = () => Navigation.goTo.title(book.id);
-    
-    // Get reading progress from localStorage (temporary)
-    const lastChapter = parseInt(localStorage.getItem(`lastChapter_${book.id}`)) || 0;
-    const progress = lastChapter > 0 && book.total_chapters > 0
-      ? ((lastChapter / book.total_chapters) * 100).toFixed(1)
-      : 0;
-    
-    card.setAttribute('data-progress', progress);
-    
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.setAttribute('data-book-id', book.id);
+  card.onclick = () => Navigation.goTo.title(book.id);
+  
+  // Get reading progress from localStorage (temporary)
+  const lastChapter = parseInt(localStorage.getItem(`lastChapter_${book.id}`)) || 0;
+  const progress = lastChapter > 0 && book.total_chapters > 0
+    ? ((lastChapter / book.total_chapters) * 100).toFixed(1)
+    : 0;
+  
+  card.setAttribute('data-progress', progress);
+  
+  // Create card with cover image
+  if (book.cover_url) {
+    // Book has a cover image
+    card.innerHTML = `
+      <div class="card-content" style="padding: 0; position: relative; height: 100%;">
+        <img src="${book.cover_url}" 
+             alt="${book.title}" 
+             style="width: 100%; height: 100%; object-fit: cover; display: block;"
+             onerror="this.style.display='none'; this.parentElement.innerHTML = '<div class=\'card-content\'><div class=\'card-title\'>${book.title}</div>${progress > 0 ? '<div class=\'card-progress\'><span class=\'card-progress-text\'>${progress}%</span><div class=\'card-progress-bar\'><div class=\'card-progress-fill\' style=\'width: ${progress}%\'>' : ''}"
+        >
+        ${progress > 0 ? `
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); padding: 8px; backdrop-filter: blur(4px);">
+            <div style="color: var(--accent); font-size: 12px; margin-bottom: 4px;">${progress}%</div>
+            <div style="height: 3px; background: var(--bg-hover); border-radius: 3px; overflow: hidden;">
+              <div style="width: ${progress}%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-soft));"></div>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  } else {
+    // No cover image - show text only
     if (progress > 0) {
       card.innerHTML = `
         <div class="card-content">
@@ -362,9 +384,10 @@
         </div>
       `;
     }
-    
-    return card;
   }
+  
+  return card;
+}
 </script>
 </body>
 </html>

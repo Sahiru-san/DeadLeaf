@@ -1347,3 +1347,77 @@ footer p {
     grid-template-columns: 1fr;
   }
 }
+/* ================= COVER IMAGES IN LIBRARY ================= */
+
+/* Card with cover image */
+.card {
+  overflow: hidden;  /* Ensures image stays within card bounds */
+}
+
+.card img {
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);  /* Subtle zoom effect on hover */
+}
+
+/* Progress overlay on cover images */
+.card .progress-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  padding: 15px 10px 10px;
+  color: white;
+  backdrop-filter: blur(2px);
+}
+
+.card .progress-overlay .progress-text {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.card .progress-overlay .progress-bar-bg {
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.card .progress-overlay .progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Horizontal scroll adjustments */
+.horizontal-scroll .card {
+  width: 140px;
+  height: 200px;
+}
+
+.horizontal-scroll .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .horizontal-scroll .card {
+    width: 120px;
+    height: 170px;
+  }
+}
+
+@media (max-width: 480px) {
+  .horizontal-scroll .card {
+    width: 100px;
+    height: 150px;
+  }
+}
