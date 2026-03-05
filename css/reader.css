@@ -40,37 +40,107 @@ body {
   gap: 14px;
 }
 
-#menu-btn {
-  font-size: 22px;
-  cursor: pointer;
+/* ================= READER FONT CONTROLS - FIXED ================= */
+.reader-font-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 3px;
+  margin-right: 8px;
+  height: 38px; /* Fixed height to prevent stretching */
+}
+
+.font-control-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
   color: var(--text-main);
-  transition: opacity 0.2s;
-}
-
-#menu-btn:hover {
-  opacity: 0.8;
-}
-
-.brand {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.back-btn {
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  padding: 0;
+}
+
+.font-control-btn:hover {
   background: var(--accent);
   color: #000000;
-  font-weight: 600;
-  transition: background 0.2s, transform 0.1s;
+  transform: scale(1.05);
 }
 
-.back-btn:hover {
-  background: var(--accent-soft);
-  transform: translateY(-2px);
+.font-size-indicator {
+  min-width: 40px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* Top bar right section - improve spacing */
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+/* Back button - consistent sizing */
+.back-btn {
+  padding: 6px 16px;
+  height: 36px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Bookmarks button - consistent sizing */
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .reader-font-controls {
+    gap: 4px;
+    height: 34px;
+  }
+  
+  .font-control-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .font-size-indicator {
+    min-width: 35px;
+    font-size: 12px;
+  }
+  
+  .back-btn {
+    padding: 4px 12px;
+    height: 34px;
+    font-size: 13px;
+  }
+  
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reader-font-controls {
+    display: none; /* Hide on very small screens, use sidebar instead */
+  }
 }
 
 /* ================================
@@ -150,39 +220,6 @@ body {
   background: var(--bg-hover);
 }
 
-/* FONT CONTROLS */
-.font-controls {
-  margin: 20px 0;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-}
-
-.font-controls p {
-  margin-bottom: 10px;
-  color: var(--text-muted);
-  font-size: 14px;
-}
-
-.font-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.font-controls button {
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  background: var(--bg-card);
-  color: var(--text-main);
-  font-weight: 600;
-  flex: 1;
-  transition: background 0.2s;
-}
-
-.font-controls button:hover {
-  background: var(--bg-hover);
-}
 
 /* ================================
    OVERLAY
@@ -482,5 +519,39 @@ body {
 @media (max-width: 480px) {
   .reader-font-controls {
     display: none; /* Hide on very small screens, keep in sidebar */
+  }
+}
+/*test*/
+/* ================= SCRIPTURE TEXT FORMATTING ================= */
+
+#chapter-content {
+  font-family: 'Georgia', 'Times New Roman', serif; /* More traditional for scriptures */
+  line-height: 1.9;
+}
+
+#chapter-content p {
+  margin-bottom: 1.2em;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+/* Style for speaker names (like "Dhritirashtra:", "Sanjaya:") */
+#chapter-content p:first-line {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 1.05em;
+}
+
+/* Add subtle styling for verses */
+#chapter-content p {
+  position: relative;
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 159, 28, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #chapter-content p {
+    padding-left: 15px;
   }
 }

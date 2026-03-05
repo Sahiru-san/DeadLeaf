@@ -138,31 +138,46 @@
   color: var(--accent);
 }
 
-/* Timer Circle */
+/* ================= AD TIMER - FIXED CENTERING ================= */
+
 .ad-timer {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  align-items: center;
+  margin: 25px 0;
+  width: 100%;
 }
 
 .timer-circle {
   position: relative;
   width: 80px;
   height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .timer-circle svg {
   width: 80px;
   height: 80px;
-  transform: rotate(0deg);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .timer-bg {
   stroke: var(--border);
+  stroke-width: 3;
+  fill: none;
 }
 
 .timer-progress {
   stroke: var(--accent);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
   transition: stroke-dashoffset 0.3s linear;
 }
 
@@ -174,6 +189,26 @@
   font-size: 18px;
   font-weight: 600;
   color: var(--accent);
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Responsive timer */
+@media (max-width: 480px) {
+  .timer-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .timer-circle svg {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .timer-text {
+    font-size: 16px;
+  }
 }
 
 /* Video container */
