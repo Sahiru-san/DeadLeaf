@@ -50,7 +50,8 @@ body {
   border-radius: 30px;
   padding: 3px;
   margin-right: 8px;
-  height: 38px; /* Fixed height to prevent stretching */
+  height: 38px;
+  /* Fixed height to prevent stretching */
 }
 
 .font-control-btn {
@@ -112,24 +113,24 @@ body {
     gap: 4px;
     height: 34px;
   }
-  
+
   .font-control-btn {
     width: 28px;
     height: 28px;
     font-size: 12px;
   }
-  
+
   .font-size-indicator {
     min-width: 35px;
     font-size: 12px;
   }
-  
+
   .back-btn {
     padding: 4px 12px;
     height: 34px;
     font-size: 13px;
   }
-  
+
   .icon-btn {
     width: 34px;
     height: 34px;
@@ -139,7 +140,8 @@ body {
 
 @media (max-width: 480px) {
   .reader-font-controls {
-    display: none; /* Hide on very small screens, use sidebar instead */
+    display: none;
+    /* Hide on very small screens, use sidebar instead */
   }
 }
 
@@ -165,9 +167,8 @@ body {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg,
-    var(--accent-soft),
-    var(--accent)
-  );
+      var(--accent-soft),
+      var(--accent));
   transition: width 0.15s linear;
 }
 
@@ -386,21 +387,21 @@ body {
   .reader-container {
     padding: 90px 16px 80px;
   }
-  
+
   #chapter-content {
     max-width: 100%;
     font-size: 17px;
   }
-  
+
   #chapter-content h2 {
     font-size: 1.4em;
   }
-  
+
   .reader-footer {
     height: 60px;
     gap: 20px;
   }
-  
+
   .reader-footer button {
     padding: 8px 20px;
     font-size: 15px;
@@ -412,17 +413,17 @@ body {
   .reader-container {
     padding: 90px 12px 70px;
   }
-  
+
   #chapter-content {
     font-size: 16px;
     line-height: 1.75;
   }
-  
+
   .reader-footer {
     height: 55px;
     gap: 15px;
   }
-  
+
   .reader-footer button {
     padding: 6px 16px;
     font-size: 14px;
@@ -446,13 +447,19 @@ body {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .reader-loading p {
   color: var(--text-muted);
 }
+
 /* ================= READER FONT CONTROLS ================= */
 .reader-font-controls {
   display: flex;
@@ -503,13 +510,13 @@ body {
   .reader-font-controls {
     gap: 4px;
   }
-  
+
   .font-control-btn {
     width: 32px;
     height: 32px;
     font-size: 12px;
   }
-  
+
   .font-size-indicator {
     min-width: 35px;
     font-size: 12px;
@@ -518,14 +525,17 @@ body {
 
 @media (max-width: 480px) {
   .reader-font-controls {
-    display: none; /* Hide on very small screens, keep in sidebar */
+    display: none;
+    /* Hide on very small screens, keep in sidebar */
   }
 }
+
 /*test*/
 /* ================= SCRIPTURE TEXT FORMATTING ================= */
 
 #chapter-content {
-  font-family: 'Georgia', 'Times New Roman', serif; /* More traditional for scriptures */
+  font-family: 'Georgia', 'Times New Roman', serif;
+  /* More traditional for scriptures */
   line-height: 1.9;
 }
 
@@ -553,5 +563,191 @@ body {
 @media (max-width: 768px) {
   #chapter-content p {
     padding-left: 15px;
+  }
+}
+
+/* ================= BOOK-SPECIFIC FORMATTING ================= */
+/* Based on your book IDs:
+   ID 4: Bhagavad Geeta (scripture)
+   ID 5: The Ramayana (scripture) 
+   ID 6: The Bible (scripture)
+   ID 7: Sherlock Holmes (fiction)
+   ID 8: Treasure Island (fiction)
+*/
+
+/* ---------- DEFAULT FICTION STYLES (for all books) ---------- */
+#chapter-content {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.8;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+#chapter-content p {
+  margin-bottom: 1.5em;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+/* ---------- SCRIPTURE STYLES (IDs 4, 5, 6) ---------- */
+/* Bhagavad Geeta (ID 4) */
+body[data-book-id="4"] #chapter-content,
+/* The Ramayana (ID 5) */
+body[data-book-id="5"] #chapter-content,
+/* The Bible (ID 6) */
+body[data-book-id="6"] #chapter-content {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  line-height: 1.9;
+  max-width: 700px;
+}
+
+body[data-book-id="4"] #chapter-content p,
+body[data-book-id="5"] #chapter-content p,
+body[data-book-id="6"] #chapter-content p {
+  margin-bottom: 1.2em;
+  padding-left: 25px;
+  border-left: 2px solid rgba(255, 159, 28, 0.15);
+  font-size: 1.05em;
+  position: relative;
+}
+
+/* Highlight speaker names in scriptures */
+body[data-book-id="4"] #chapter-content p:first-line,
+body[data-book-id="5"] #chapter-content p:first-line,
+body[data-book-id="6"] #chapter-content p:first-line {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 1.1em;
+}
+
+/* Style for verse numbers (like "17:6" in Bible) */
+body[data-book-id="6"] #chapter-content p:first-child {
+  font-variant: small-caps;
+}
+
+/* Add subtle background for scripture */
+body[data-book-id="4"] #chapter-content,
+body[data-book-id="5"] #chapter-content,
+body[data-book-id="6"] #chapter-content {
+  background: rgba(255, 248, 235, 0.02);
+  padding: 20px 25px;
+  border-radius: 12px;
+}
+
+/* ---------- FICTION STYLES (IDs 7, 8) ---------- */
+/* Sherlock Holmes (ID 7) */
+body[data-book-id="7"] #chapter-content,
+/* Treasure Island (ID 8) */
+body[data-book-id="8"] #chapter-content {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.8;
+  max-width: 750px;
+}
+
+body[data-book-id="7"] #chapter-content p,
+body[data-book-id="8"] #chapter-content p {
+  margin-bottom: 1.5em;
+  padding-left: 0;
+  border-left: none;
+  text-indent: 1.5em;
+  /* Traditional book paragraph indentation */
+}
+
+/* First paragraph after chapter heading - no indent */
+body[data-book-id="7"] #chapter-content h2+p,
+body[data-book-id="8"] #chapter-content h2+p {
+  text-indent: 0;
+}
+
+/* Chapter titles for fiction */
+body[data-book-id="7"] #chapter-content h2,
+body[data-book-id="8"] #chapter-content h2 {
+  font-family: 'Georgia', serif;
+  font-size: 1.8em;
+  text-align: center;
+  margin: 1.5em 0 2em;
+  letter-spacing: 1px;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 15px;
+}
+
+/* Chapter titles for scripture */
+body[data-book-id="4"] #chapter-content h2,
+body[data-book-id="5"] #chapter-content h2,
+body[data-book-id="6"] #chapter-content h2 {
+  font-family: 'Georgia', serif;
+  font-size: 1.6em;
+  text-align: left;
+  margin: 1.2em 0 1.5em;
+  color: var(--accent);
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+}
+
+/* ---------- SPECIAL FOR TREASURE ISLAND (Part structure) ---------- */
+body[data-book-id="8"] #chapter-content h3 {
+  font-size: 1.3em;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 2em 0 1em;
+  font-style: italic;
+}
+
+/* Style for "PART ONE", "PART TWO", etc. */
+body[data-book-id="8"] #chapter-content p:contains("PART") {
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+
+  body[data-book-id="4"] #chapter-content p,
+  body[data-book-id="5"] #chapter-content p,
+  body[data-book-id="6"] #chapter-content p {
+    padding-left: 15px;
+  }
+
+  body[data-book-id="7"] #chapter-content p,
+  body[data-book-id="8"] #chapter-content p {
+    text-indent: 1em;
+  }
+
+  #chapter-content h2 {
+    font-size: 1.4em !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  body[data-book-id="4"] #chapter-content,
+  body[data-book-id="5"] #chapter-content,
+  body[data-book-id="6"] #chapter-content {
+    padding: 15px;
+  }
+
+  body[data-book-id="4"] #chapter-content p,
+  body[data-book-id="5"] #chapter-content p,
+  body[data-book-id="6"] #chapter-content p {
+    padding-left: 10px;
+  }
+}
+
+/* ---------- DARK THEME ADJUSTMENTS ---------- */
+body.night body[data-book-id="4"] #chapter-content,
+body.night body[data-book-id="5"] #chapter-content,
+body.night body[data-book-id="6"] #chapter-content {
+  background: rgba(255, 248, 235, 0.01);
+}
+
+/* ---------- PRINT STYLES ---------- */
+@media print {
+
+  body[data-book-id="4"] #chapter-content p,
+  body[data-book-id="5"] #chapter-content p,
+  body[data-book-id="6"] #chapter-content p {
+    border-left-color: #ccc;
   }
 }
